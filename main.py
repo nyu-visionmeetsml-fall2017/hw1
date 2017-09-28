@@ -98,12 +98,17 @@ while True:
 	ax.cla()
 	ax.imshow(im)
 	for ii, box in enumerate(rbboxes):
-		print '     -', ii, rclasses[ii], rscores[ii]
-		bx0, by0, bx1, by1 = box.tolist()
+		# bx0, by0, bx1, by1 = box.tolist()
+		by0, bx0, by1, bx1 = box.tolist()
 		bx0, bx1 = width * bx0, width * bx1
 		by0, by1 = height * by0, height * by1
 
+		print '     -', ii, rclasses[ii], rscores[ii]
+		print '       ', bx0, bx1, by0, by1
+
 		rect = patches.Rectangle((bx0, by0), bx1 - bx0, by1 - by0, linewidth=1,edgecolor='r',facecolor='none')
+		plt.text(bx0, by1, 'Class: %d - %.1f%%' % (rclasses[ii], rscores[ii] * 100), color='cyan')
+
 		ax.add_patch(rect)
 
 	plt.pause(.01)
