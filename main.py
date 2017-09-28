@@ -82,6 +82,29 @@ plt.ion()
 fig, ax = plt.subplots(1)
 plt.show()
 
+label_names = [
+	'Aeroplanes',
+	'Bicycles',
+	'Birds',
+	'Boats',
+	'Bottles',
+	'Buses',
+	'Cars',
+	'Cats',
+	'Chairs',
+	'Cows',
+	'Dining tables',
+	'Dogs',
+	'Horses',
+	'Motorbikes',
+	'People',
+	'Potted plants',
+	'Sheep',
+	'Sofas',
+	'Trains',
+	'TV/Monitors']
+
+
 global depth, rgb
 while True:
 	# Get a fresh frame
@@ -103,11 +126,13 @@ while True:
 		bx0, bx1 = width * bx0, width * bx1
 		by0, by1 = height * by0, height * by1
 
-		print '     -', ii, rclasses[ii], rscores[ii]
+		name = label_names[rclasses[ii] - 1]
+
+		print '     -', ii, name, rscores[ii]
 		print '       ', bx0, bx1, by0, by1
 
 		rect = patches.Rectangle((bx0, by0), bx1 - bx0, by1 - by0, linewidth=1,edgecolor='r',facecolor='none')
-		plt.text(bx0, by1, 'Class: %d - %.1f%%' % (rclasses[ii], rscores[ii] * 100), color='cyan')
+		plt.text(bx0, by1, 'Class: %s - %.1f%%' % (name, rscores[ii] * 100), color='cyan')
 
 		ax.add_patch(rect)
 
